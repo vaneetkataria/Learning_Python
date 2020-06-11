@@ -10,7 +10,7 @@ ConStr = "SERVER=udqa;DB_LOCALE=en_US.57372;DATABASE=dadt;HOST=dhscalqaldbm01a.a
 try:
     print('Going to Connect to Informix DB.')
     conn = dbapi2.connect(ConStr, "", "")
-    print('Connected Successfylly!!')
+    print('Connected Successfully!!')
 except Exception as e:
     print(e)
     print('Connection failed!!')
@@ -19,24 +19,6 @@ except Exception as e:
 # Create Cursor
 print('Creating cursor.')
 cur = conn.cursor()
-
-# Prepare Query type 1
-# query = "select a.*, b.min_lead_days, b.max_lead_days, b.cache_stale_time_value, b.cache_stale_time_units \
-# from ud_cache_chain_config a, ud_cache_stale_time_config b \
-# where a.chain = b.chain \
-# and a.config_level = b.config_level \
-# and a.affiliates = b.affiliates \
-# and a.properties = b.properties \
-# and a.chain in ('MC','BG','BR','CY','DP','ET','FN','RC','RZ','TO','XV','VC','AK','EB','AR','GE','OX','P2','DE','FP','TX','SI','WI','WH','MD','AL','EL','LC','XR','GX')"
-
-# Prepare Query type 2
-# query = "select a.*, b.min_lead_days, b.max_lead_days, b.cache_stale_time_value, b.cache_stale_time_units \
-# from ud_cache_chain_config a, ud_cache_stale_time_config b \
-# where a.chain = b.chain \
-# and a.config_level = b.config_level \
-# and a.affiliates = b.affiliates \
-# and a.properties = b.properties  \
-# and a.affiliates like '%00%'"
 
 # Prepare Query type 3
 query = "select a.chain as chain, \
