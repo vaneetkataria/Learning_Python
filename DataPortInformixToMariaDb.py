@@ -9,14 +9,14 @@ ConStr = "SERVER=udqa;DB_LOCALE=en_US.57372;DATABASE=dadt;HOST=dhscalqaldbm01a.a
 # Establish Database connection with Informix Database.
 try:
     print('Establishing conncetion with Informix DB.')
-    ifxConn = ifxDb.connect(ConStr, "", "")
+    dadtIfxDbConn = ifxDb.connect(ConStr, "", "")
     print('Connection Successfully established with InformixDb!!')
 except Exception as e:
     print(e)
     print('INformix Db Connection failed!!')
 
 print('Creating cursor.')
-ifxCur = ifxConn.cursor()
+dadtIfxDbCur = dadtIfxDbConn.cursor()
 
 # Establish Database connection with Mariadb Database.
 try:
@@ -34,20 +34,20 @@ mariadbCur = mariadb_connection.cursor()
 # Cleanup Existing data in informix newtable
 try:
  print('Going to execute delete newtable statement in informix db. ')
- stmt = ifxCur.execute('delete from newtable;')
+ stmt = dadtIfxDbCur.execute('delete from newtable;')
  print ('delete from newtable Successful!!')
 except:
  print ('delete from newtable failed!!')
 
 print('Going to exceute inserts in informixdb.')
-ifxCur.execute("insert into newtable values( 1, 'Sunday', 101, 201 )")
-ifxCur.execute("insert into newtable values( 2, 'Monday', 102, 202 )")
-ifxCur.execute("insert into newtable values( 3, 'Tuesday', 103, 203 )")
-ifxCur.execute("insert into newtable values( 4, 'Wednesday', 104, 204 )")
-ifxCur.execute("insert into newtable values( 5, 'Thursday', 105, 2005 )")
-ifxCur.execute("insert into newtable values( 6, 'Friday', 106, 206 )")
-ifxCur.execute("insert into newtable values( 7, 'Saturday', 107, 207 )")
-ifxConn.commit ()
+dadtIfxDbCur.execute("insert into newtable values( 1, 'Sunday', 101, 201 )")
+dadtIfxDbCur.execute("insert into newtable values( 2, 'Monday', 102, 202 )")
+dadtIfxDbCur.execute("insert into newtable values( 3, 'Tuesday', 103, 203 )")
+dadtIfxDbCur.execute("insert into newtable values( 4, 'Wednesday', 104, 204 )")
+dadtIfxDbCur.execute("insert into newtable values( 5, 'Thursday', 105, 2005 )")
+dadtIfxDbCur.execute("insert into newtable values( 6, 'Friday', 106, 206 )")
+dadtIfxDbCur.execute("insert into newtable values( 7, 'Saturday', 107, 207 )")
+dadtIfxDbConn.commit ()
 
 # Cleanup Existing data in newtable
 try:
@@ -58,8 +58,8 @@ except:
  print ('delete from newtable_1 failed!!')
 
 print('Executing select from informixdb.')
-ifxCur.execute("SELECT c1, c2, c3 , c4  FROM newtable")
-rows = ifxCur.fetchall()
+dadtIfxDbCur.execute("SELECT c1, c2, c3 , c4  FROM newtable")
+rows = dadtIfxDbCur.fetchall()
 
 try:
  for row in rows:
@@ -83,8 +83,8 @@ try:
 except Exception as e:
   print(e)
 finally:
- ifxCur.close()
- ifxConn.close()
+ dadtIfxDbCur.close()
+ dadtIfxDbConn.close()
  mariadbCur.close()
  mariadb_connection.close()
 
