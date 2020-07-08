@@ -1,0 +1,23 @@
+CREATE TABLE `ud_cache_settings` (
+  `exec_wk` date NOT NULL,
+  `chain` varchar(10) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
+  `config_level` int(11) NOT NULL DEFAULT 0,
+  `affiliates` varchar(100) NOT NULL DEFAULT 'ALL',
+  `properties` varchar(255) NOT NULL DEFAULT 'ALL',
+  `cache_keys` varchar(255) NOT NULL DEFAULT 'GDA&GDI&GDS&IND&MTQ&NCH&NPR&NRM&OTD&PIC&RLC&RPI&RPC',
+  `noncache_keys` varchar(255) DEFAULT NULL,
+  `cache_neg_rates` char(1) DEFAULT 'Y',
+  `force_cache_only` varchar(1) NOT NULL DEFAULT 'N',
+  `no_override_sourceonly` char(1) DEFAULT 'N',
+  `min_lead_days` int(11) NOT NULL,
+  `max_lead_days` int(11) NOT NULL,
+  `cache_stale_time_value` int(11) NOT NULL,
+  `cache_stale_time_units` varchar(50) NOT NULL,
+  `dadp_brand_name` varchar(100) DEFAULT NULL,
+  `ud_parentbrand` varchar(10) DEFAULT NULL,
+  `ud_parentbrand_name` varchar(100) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`exec_wk`,`chain`,`config_level`,`affiliates`,`properties`,`min_lead_days`,`max_lead_days`),
+  UNIQUE KEY `ud_cache_settings_un` (`exec_wk`,`chain`,`config_level`,`affiliates`,`properties`,`min_lead_days`,`max_lead_days`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
